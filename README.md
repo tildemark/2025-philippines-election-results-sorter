@@ -15,18 +15,22 @@ This is a simple browser extension designed to automatically sort the tables on 
 
 2.  **Open your Browser's Extensions Page:**
     * **Google Chrome/Brave/Edge:** Open your browser and type `chrome://extensions` (or `edge://extensions`) in the address bar and press Enter.
+
 ![Open your Browser's Extensions Page](img/browserextensions1.jpg)
 
 3.  **Enable Developer Mode:** Toggle the "Developer mode" switch in the top right corner of the extensions page to the "on" position.
+
 ![Enable Developer Mode](img/enabledevelopermode.jpg)
 
 4.  **Load the Extension:**
     * Click the "Load unpacked" button in the top left corner of the extensions page.
     * In the file dialog that appears, navigate to the location where you saved the **unzipped** folder (you'll need to unzip the ZIP file first).
     * Select the folder containing the `manifest.json` and `content.js` files and click "Select Folder" (or a similar button).
+
 ![Load the Extension](img/selectfolder.jpg)
 
 5.  **The extension is now installed.** It will automatically run on the COMELEC election results page (https://2025electionresults.comelec.gov.ph/coc-result) after the tables are loaded.
+
 ![The extension is now installed](img/success.jpg)
 
 ## Usage
@@ -37,6 +41,7 @@ This is a simple browser extension designed to automatically sort the tables on 
 4.  You will also see a "Sort ↓" button in the header of the "Votes" column.
 5.  Clicking the "Sort ↓" button will change the sort order to ascending, and the button text will update to "Sort ↑".
 6.  Clicking the button again will revert the sorting to descending.
+
 ![Adds the Sort button to the table](img/sorted.jpg)
 
 ## Contributing
