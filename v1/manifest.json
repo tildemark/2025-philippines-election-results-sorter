@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "name": "COMELEC Results Sorter",
+    "version": "1.0",
+    "author": "alfredo Sanchez jr <derf@sanchez.ph> (https://github.com/tildemark)",
+    "permissions": ["scripting", "activeTab"],
+    "content_scripts": [
+      {
+        "matches": ["https://2025electionresults.comelec.gov.ph/*"],
+        "js": ["content.js"]
+      }
+    ]
+  }
