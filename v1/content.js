@@ -1,5 +1,6 @@
 (function () {
-    const SORT_COLUMN_INDEX = 2; // Votes column
+    const SORT_COLUMN_INDEX_MOBILE = 1; // Second column for mobile
+    const SORT_COLUMN_INDEX_DESKTOP = 2; // Votes column for desktop
     const SORT_BUTTON_CLASS = "sort-toggle-btn";
     const SORTED_CLASS = "extension-sorted";
 
@@ -24,16 +25,14 @@
         }
         rows.forEach(row => tbody.appendChild(row));
         table.classList.add(SORTED_CLASS);
-        console.log("✅ Table sorted:", table);
+        console.log("✅ Table sorted (column index: " + columnIndex + "):", table);
     }
 
-    function addSortButtonToTable(table) {
+    function addSortButtonToTable(table, columnIndex) {
         if (!table.querySelector("thead") || !table.querySelector("tbody")) return;
-        if (table.dataset.sortEnhanced === "true") return;
-
         const thead = table.querySelector("thead");
         const headerRow = thead.rows[0];
-        const targetCell = headerRow?.cells[SORT_COLUMN_INDEX];
+        const targetCell = headerRow?.cells[columnIndex];
         if (!targetCell) return;
 
         if (!targetCell.querySelector(`.${SORT_BUTTON_CLASS}`)) {
@@ -50,7 +49,7 @@
                 e.stopPropagation();
                 currentOrder = currentOrder === "desc" ? "asc" : "desc";
                 button.textContent = currentOrder === "desc" ? "Sort ↓" : "Sort ↑";
-                sortTable(table, SORT_COLUMN_INDEX, currentOrder);
+                sortTable(table, columnIndex, currentOrder);
             });
 
             targetCell.appendChild(button);
@@ -58,8 +57,22 @@
         table.dataset.sortEnhanced = "true";
     }
 
+    function enhanceTable(table) {
+        // Check for mobile view (simplistic check based on number of visible columns)
+        const firstRowCells = table.querySelector('thead tr')?.cells;
+        if (firstRowCells && firstRowCells.length <= 2) {
+            addSortButtonToTable(table, SORT_COLUMN_INDEX_MOBILE);
+            sortTable(table, SORT_COLUMN_INDEX_MOBILE, "desc");
+            console.log("✅ Mobile view detected, sort button added to column " + SORT_COLUMN_INDEX_MOBILE);
+        } else {
+            addSortButtonToTable(table, SORT_COLUMN_INDEX_DESKTOP);
+            sortTable(table, SORT_COLUMN_INDEX_DESKTOP, "desc");
+            console.log("✅ Desktop view detected, sort button added to column " + SORT_COLUMN_INDEX_DESKTOP);
+        }
+    }
+
     function observeTableLoad() {
-        const targetNode = document.body; // Let's start by observing the whole body
+        const targetNode = document.body;
         const config = { childList: true, subtree: true };
 
         const observer = new MutationObserver((mutationsList, observer) => {
@@ -68,16 +81,12 @@
                     mutation.addedNodes.forEach(node => {
                         if (node.nodeType === 1) {
                             if (node.tagName === 'TABLE' && !node.classList.contains(SORTED_CLASS)) {
-                                addSortButtonToTable(node);
-                                sortTable(node, SORT_COLUMN_INDEX, "desc");
-                                console.log("✅ Dynamically added table found and sorted:", node);
+                                enhanceTable(node);
                             } else if (node.querySelectorAll) {
                                 const newTables = node.querySelectorAll('table');
                                 newTables.forEach(table => {
                                     if (!table.classList.contains(SORTED_CLASS)) {
-                                        addSortButtonToTable(table);
-                                        sortTable(table, SORT_COLUMN_INDEX, "desc");
-                                        console.log("✅ Dynamically added nested table found and sorted:", table);
+                                        enhanceTable(table);
                                     }
                                 });
                             }
