@@ -11,7 +11,7 @@ This is a simple browser extension designed to automatically sort the tables on 
 
 ## Installation (via ZIP File)
 
-1.  **Download the ZIP File:**  Download the ZIP file (`2025 election results sorter v1.zip`) containing the extension files (`manifest.json` and `content.js`). Save this ZIP file to a location you can easily access.
+1.  **Download the ZIP File:**  Download the ZIP file (`2025 election results sorter v1.zip`) containing the extension files (`manifest.json` and `content.js`). Save this ZIP file to a location you can easily access. Unzip the folder.
 
 2.  **Open your Browser's Extensions Page:**
     * **Google Chrome/Brave/Edge:** Open your browser and type `chrome://extensions` (or `edge://extensions`) in the address bar and press Enter.
