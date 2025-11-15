@@ -46,5 +46,5 @@ This is a simple browser extension designed to automatically sort the tables on 
 
 ## Contributing
 
-If you have any suggestions or find any issues, feel free to open an issue or submit a pull request on GitHub (if you decide to host it there).
+If you have any suggestions or find any issues, feel free to open an issue or submit a pull request on GitHub.
 
